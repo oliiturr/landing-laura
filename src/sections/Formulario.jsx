@@ -8,10 +8,11 @@ import { app } from "../../firebase"; // o la ruta a tu firebase.js
 
 
 
+
 export default function FormularioModal({ isOpen, onClose }) {
   const [nombre, setNombre] = useState('');
   const [whatsappLocal, setWhatsappLocal] = useState('');
-const [whatsapp, setWhatsapp] = useState('');
+  const [whatsapp, setWhatsapp] = useState('');
   const [motivo, setMotivo] = useState('');
   const [motivoOtro, setMotivoOtro] = useState('');
   const [horario, setHorario] = useState('');
@@ -45,23 +46,21 @@ const [whatsapp, setWhatsapp] = useState('');
   }
 
   try {
-    const functions = getFunctions(app);
-    const crearPreferencia = httpsCallable(functions, 'crearPreferencia');
-
-    const result = await crearPreferencia({
+    // Guardar en Firestore
+    await addDoc(collection(db, 'clientes'), {
       nombre,
       whatsapp: telefonoCompleto,
       motivo: motivoFinal,
       horario,
+      creado: Timestamp.now(),
     });
 
-    const preferenceId = result.data.preferenceId;
-
-    // Redirige al checkout
-    window.open(`https://www.mercadopago.com.ar/checkout/v1/redirect?pref_id=${preferenceId}`, '_blank');
+    // Redirigir al link de pago
+    window.open('https://mpago.la/13onQbx', '_blank');
+    onClose(); // cerrar modal si querés
   } catch (error) {
     console.error(error);
-    setError('Error al crear la preferencia de pago.');
+    setError('Hubo un problema al enviar el formulario.');
   }
 };
 

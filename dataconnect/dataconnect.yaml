@@ -1,0 +1,12 @@
+specVersion: "v1"
+serviceId: "landing-laura"
+location: "us-central1"
+schema:
+  source: "./schema"
+  datasource:
+    postgresql:
+      database: "fdcdb"
+      cloudSql:
+        instanceId: "landing-laura-fdc"
+      # schemaValidation: "COMPATIBLE"
+connectorDirs: ["./connector"]
