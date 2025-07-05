@@ -56,7 +56,7 @@ export default function FormularioModal({ isOpen, onClose }) {
     });
 
     // Redirigir al link de pago
-    window.open('https://mpago.la/13onQbx', '_blank');
+    window.location.href = 'https://mpago.la/13onQbx';
     onClose(); // cerrar modal si querés
   } catch (error) {
     console.error(error);
