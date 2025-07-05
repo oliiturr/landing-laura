@@ -3,7 +3,6 @@ import { X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { db } from '../../firebase';
 import { collection, addDoc, Timestamp } from 'firebase/firestore';
-import { getFunctions, httpsCallable } from "firebase/functions";
 import { app } from "../../firebase"; // o la ruta a tu firebase.js
 
 
@@ -117,9 +116,10 @@ export default function FormularioModal({ isOpen, onClose }) {
               >
                 <option value="">Motivo de consulta</option>
                 <option>Alimentos y régimen</option>
-                <option>Divorcio y bienes</option>
+                <option>Divorcio y división de bienes</option>
                 <option>Adopción</option>
                 <option>Sucesión</option>
+                <option>Negociación extra judicial</option>
                 <option>Otro</option>
               </select>
 
@@ -153,7 +153,7 @@ export default function FormularioModal({ isOpen, onClose }) {
               </button>
 
               <p className="text-xs mt-2 text-center">
-                Luego del pago, recibirás un WhatsApp para coordinar día y hora según tu franja elegida.
+                Luego del pago, se te redireccionará a whatsapp.
               </p>
             </form>
           </motion.div>

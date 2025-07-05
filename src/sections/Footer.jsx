@@ -3,9 +3,9 @@ import { InstagramIcon, Phone } from 'lucide-react';
 export default function Footer() {
   return (
     <footer className="py-8 px-4 text-center text-sm bg-[#604346] text-white space-y-2">
-      <p>Maria Laura, abogada en familia y sucesiones.</p>
+      <p>Maria Laura Ballés, abogada en familia y sucesiones.</p>
       <div className="flex justify-center gap-4">
-        <a href="https://wa.me/5493541680585?text=Hola%2C%20me%20gustar%C3%ADa%20hacer%20una%20consulta%20legal" target="_blank" rel="noopener noreferrer">
+        <a href="https://wa.me/5493541680585" target="_blank" rel="noopener noreferrer">
           <Phone />
         </a>
         <a href="https://instagram.com/tuusuario" target="_blank" rel="noopener noreferrer">
