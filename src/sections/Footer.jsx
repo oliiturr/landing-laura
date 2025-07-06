@@ -8,7 +8,7 @@ export default function Footer() {
         <a href="https://wa.me/5493541680585" target="_blank" rel="noopener noreferrer">
           <Phone />
         </a>
-        <a href="https://instagram.com/laura.balles" target="_blank" rel="noopener noreferrer">
+        <a href="https://instagram.com/abogadalauraballes" target="_blank" rel="noopener noreferrer">
           <InstagramIcon />
         </a>
       </div>
