@@ -9,6 +9,7 @@ import { app } from "../../firebase"; // o la ruta a tu firebase.js
 
 
 export default function FormularioModal({ isOpen, onClose }) {
+  const [loading, setLoading] = useState(false); // 👈 nuevo estado
   const [nombre, setNombre] = useState('');
   const [whatsappLocal, setWhatsappLocal] = useState('');
   const [whatsapp, setWhatsapp] = useState('');
@@ -30,17 +31,21 @@ export default function FormularioModal({ isOpen, onClose }) {
 
   const handleSubmit = async (e) => {
   e.preventDefault();
+  if (loading) return;
+  setLoading(true);
   const motivoFinal = motivo === 'Otro' ? motivoOtro.trim() : motivo;
   const telefonoCompleto = `+549${whatsappLocal}`;
   const regexTelefonoArg = /^(\+549)?[1-9][0-9]{9}$/;
 
   if (!nombre || !whatsappLocal || !motivoFinal || !horario) {
     setError('Por favor completá todos los campos.');
+    setLoading(false);
     return;
   }
 
   if (!regexTelefonoArg.test(telefonoCompleto)) {
     setError('Ingresá un número de WhatsApp válido de Argentina.');
+    setLoading(false);
     return;
   }
 
@@ -54,12 +59,13 @@ export default function FormularioModal({ isOpen, onClose }) {
       creado: Timestamp.now(),
     });
 
-    // Redirigir al link de pago
-    window.location.href = 'https://mpago.la/13onQbx';
-    onClose(); // cerrar modal si querés
+    window.location.href = 'https://mpago.la/2hZpkou';
+    onClose();
   } catch (error) {
     console.error(error);
     setError('Hubo un problema al enviar el formulario.');
+  } finally {
+    setLoading(false); // 👈 vuelve a habilitar
   }
 };
 
@@ -147,9 +153,12 @@ export default function FormularioModal({ isOpen, onClose }) {
 
               <button
                 type="submit"
-                className="block text-center text-sm sm:text-md bg-[#604346] text-white font-bold px-6 py-3 rounded-xl hover:bg-[#442f2d] transition w-full"
+                disabled={loading}
+                className={`block text-center text-sm sm:text-md font-bold px-6 py-3 rounded-xl transition w-full 
+    ${loading ? 'bg-gray-400 text-white cursor-not-allowed' : 'bg-[#604346] hover:bg-[#442f2d] text-white'}
+  `}
               >
-                Confirmar consulta y abonar
+                  {loading ? 'Procesando...' : 'Confirmar consulta y abonar'}
               </button>
 
               <p className="text-xs mt-2 text-center">

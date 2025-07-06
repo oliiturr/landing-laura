@@ -1,4 +1,4 @@
-import { Users, Baby, HeartHandshake, Landmark, ListChecks } from 'lucide-react';
+import { Users, Baby, HeartHandshake, Landmark, ListChecks, Scale} from 'lucide-react';
 
 export default function ComoAyudo() {
   return (
@@ -12,7 +12,7 @@ export default function ComoAyudo() {
         <div className="flex items-center gap-3"><Baby className="text-primary" /> Adopción por integración.</div>
         <div className="flex items-center gap-3"><Landmark className="text-primary" /> Declaratoria de herederos y sucesiones.</div>
         <div className="flex items-center gap-3"><ListChecks className="text-primary" /> Otros temas de familia.</div>
-        <div className="flex items-center gap-3"><Landmark className="text-primary" /> Negociación extra judicial.</div>
+        <div className="flex items-center gap-3"><Scale className="text-primary" /> Negociación extra judicial.</div>
       </div>
       
     </section>
