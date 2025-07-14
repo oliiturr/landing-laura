@@ -12,7 +12,9 @@ export default function Footer() {
           <InstagramIcon />
         </a>
       </div>
-      <p>Consultas online, no constituye relación abogado-cliente hasta confirmación de servicios.</p>
+      <p className='mb-10'>Consultas online, no constituye relación abogado-cliente hasta confirmación de servicios.</p>
+      <p>Diseño y desarrollo web realizado por Olivia Iturrusgarai.</p>
+      <p>Si querés contactarla para tu web, escribile a: oliviaballes2008@gmail.com</p>
     </footer>
   );
 }
