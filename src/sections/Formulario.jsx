@@ -3,7 +3,6 @@ import { X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { db } from '../../firebase';
 import { collection, addDoc, Timestamp } from 'firebase/firestore';
-import { app } from "../../firebase"; // o la ruta a tu firebase.js
 
 
 
@@ -29,10 +28,11 @@ export default function FormularioModal({ isOpen, onClose }) {
     }
   }, [isOpen]);
 
-  const handleSubmit = async (e) => {
+ const handleSubmit = async (e) => {
   e.preventDefault();
   if (loading) return;
   setLoading(true);
+
   const motivoFinal = motivo === 'Otro' ? motivoOtro.trim() : motivo;
   const telefonoCompleto = `+549${whatsappLocal}`;
   const regexTelefonoArg = /^(\+549)?[1-9][0-9]{9}$/;
@@ -50,7 +50,7 @@ export default function FormularioModal({ isOpen, onClose }) {
   }
 
   try {
-    // Guardar en Firestore
+    // 1️⃣ Guardar en Firestore
     await addDoc(collection(db, 'clientes'), {
       nombre,
       whatsapp: telefonoCompleto,
@@ -59,17 +59,28 @@ export default function FormularioModal({ isOpen, onClose }) {
       creado: Timestamp.now(),
     });
 
+    // 2️⃣ Enviar a Formspree
+    await fetch("https://formspree.io/f/xnnzwoay", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        nombre,
+        whatsapp: telefonoCompleto,
+        motivo: motivoFinal,
+        horario
+      }),
+    });
+
+    // 3️⃣ Redirigir a pago
     window.location.href = 'https://mpago.la/2hZpkou';
     onClose();
   } catch (error) {
     console.error(error);
     setError('Hubo un problema al enviar el formulario.');
   } finally {
-    setLoading(false); // 👈 vuelve a habilitar
+    setLoading(false);
   }
 };
-
-
 
   return (
     <AnimatePresence>
@@ -78,7 +89,7 @@ export default function FormularioModal({ isOpen, onClose }) {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 flex items-center justify-center z-50 backdrop-blur-sm"
+          className="fixed inset-0 flex items-center justify-center z-50 bg-black/20 backdrop-blur-sm"
         >
           <motion.div
             initial={{ scale: 0.9, opacity: 0 }}

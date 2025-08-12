@@ -13,8 +13,17 @@ export default function Footer() {
         </a>
       </div>
       <p className='mb-10'>Consultas online, no constituye relación abogado-cliente hasta confirmación de servicios.</p>
-      <p>Diseño y desarrollo web realizado por Olivia Iturrusgarai.</p>
-      <p>Si querés contactarla para tu web, escribile a: oliviaballes2008@gmail.com</p>
+      <p className="text-white text-xs sm:text-sm text-center mt-4">
+  App web desarrollada por{" "}
+  <a
+    href="https://www.instagram.com/lituweb"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="font-semibold text-white hover:text-gray-100 underline"
+  >
+    @lituweb
+  </a>
+</p>
     </footer>
   );
 }
